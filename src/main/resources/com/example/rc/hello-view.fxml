@@ -5,12 +5,19 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rc.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <ImageView fitHeight="155.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
 
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
+    <ImageView  pickOnBounds="true" preserveRatio="true" fx:id="ImageBox"/>
+
+    <HBox alignment="BOTTOM_CENTER" spacing="15" fx:id="HB" prefHeight="1000" prefWidth="1000" ></HBox>
+    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn1" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn2" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn3" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn4" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn5" prefHeight="150" maxWidth="1000"/>
+
 </VBox>
