@@ -12,12 +12,13 @@
     </padding>
 
     <ImageView  pickOnBounds="true" preserveRatio="true" fx:id="ImageBox"/>
+    <Button onAction="#onHelloBtnClick" text="Start!" fx:id="StartBtn"/>
 
-    <HBox alignment="BOTTOM_CENTER" spacing="15" fx:id="HB" prefHeight="1000" prefWidth="1000" ></HBox>
-    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn1" prefHeight="150" maxWidth="1000"/>
-    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn2" prefHeight="150" maxWidth="1000"/>
-    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn3" prefHeight="150" maxWidth="1000"/>
-    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn4" prefHeight="150" maxWidth="1000"/>
-    <Button onAction="#onHelloButtonClick" text="Hello!" fx:id="Btn5" prefHeight="150" maxWidth="1000"/>
-
-</VBox>
+    <HBox alignment="BOTTOM_CENTER" spacing="15" fx:id="HB" prefHeight="1000" prefWidth="1000">
+    <Button onAction="#onChoiceBtn1Click" text="Hello!" fx:id="Btn1" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onChoiceBtn2Click" text="Hello!" fx:id="Btn2" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onChoiceBtn3Click" text="Hello!" fx:id="Btn3" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onChoiceBtn4Click" text="Hello!" fx:id="Btn4" prefHeight="150" maxWidth="1000"/>
+    <Button onAction="#onChoiceBtn5Click" text="Other" fx:id="Btn5" prefHeight="150" maxWidth="1000"/>
+    </HBox>
+        </VBox>
