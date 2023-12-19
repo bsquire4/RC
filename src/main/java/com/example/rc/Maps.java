@@ -1,15 +1,20 @@
 package com.example.rc;
 
 public class Maps {
-    private String location;
+    private String Blanklocation;
+    private String RouteLocation;
+    private String DistanceLocation;
+
     private int numChoices;
     private String[] colours;
     private int correctChoice;
     protected int id;
     private int [] distances;
 
-    public Maps(int id, String location, int numChoices, int correctChoice, String[] colours, int[] distances) {
-        this.location = location;
+    public Maps(int id, String Blanklocation,String RouteLocation, String DistanceLocation, int numChoices, int correctChoice, String[] colours, int[] distances) {
+        this.Blanklocation = Blanklocation;
+        this.RouteLocation = RouteLocation;
+        this.DistanceLocation = DistanceLocation;
         this.numChoices = numChoices;
         this.colours = colours;
         this.correctChoice = correctChoice;
@@ -18,12 +23,28 @@ public class Maps {
     }
 
 
-    public String getLocation() {
-        return location;
+    public String getBlanklocation() {
+        return Blanklocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setBlanklocation(String blanklocation) {
+        Blanklocation = blanklocation;
+    }
+
+    public String getRouteLocation() {
+        return RouteLocation;
+    }
+
+    public void setRouteLocation(String routeLocation) {
+        RouteLocation = routeLocation;
+    }
+
+    public String getDistanceLocation() {
+        return DistanceLocation;
+    }
+
+    public void setDistanceLocation(String distanceLocation) {
+        DistanceLocation = distanceLocation;
     }
 
     public int getNumChoices() {
