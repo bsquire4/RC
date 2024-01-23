@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.rc.ReviewScreen"
+            prefHeight="400.0" prefWidth="600.0">
+    <left>
+        <VBox fx:id="VBImageContainer" alignment="CENTER" maxHeight="500.0" maxWidth="1000.0" spacing="10.0"
+              prefWidth="550" VBox.vgrow="ALWAYS">
+            <ImageView fx:id="ImageBox" pickOnBounds="true" preserveRatio="true" fitHeight="400" fitWidth="600"/>
+            <Button fx:id="ToggleImage" onAction="#changeImage" prefWidth="150.0" text="Toggle the Map Image"
+                    BorderPane.alignment="CENTER"/>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" maxHeight="500.0" maxWidth="1000.0" spacing="10.0"
+              prefWidth="550" VBox.vgrow="ALWAYS">
+            <Label fx:id="reviewText" text="EXAMPLE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                   wrapText="true"/>
+            <Button fx:id="NextMapBtn" onAction="#nextMap" prefWidth="150.0" text="Next map"
+                    BorderPane.alignment="CENTER"/>
+            <Button fx:id="FlagBtn" onAction="#flagBtn" prefWidth="150.0" text="Flag this map for an error"
+                    BorderPane.alignment="CENTER"/>
+        </VBox>
+    </right>
+</BorderPane>

@@ -6,20 +6,15 @@ public class Choices {
     private int id;
     private boolean correctChoice;
     private Float percentageBehind;
-    private LocalDate date;
 
     public Choices(int id, Float percentageBehind) {
         this.id = id;
         this.percentageBehind = percentageBehind;
-        if(this.percentageBehind == 1)
-        {
+        if (this.percentageBehind == 1) {
             correctChoice = true;
-        }
-        else
-        {
+        } else {
             correctChoice = false;
         }
-        this.date = java.time.LocalDate.now();
     }
 
     @Override
@@ -28,7 +23,19 @@ public class Choices {
                 "id=" + id +
                 ", correctChoice=" + correctChoice +
                 ", percentageBehind=" + percentageBehind +
-                ", date=" + date +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isCorrectChoice() {
+        return correctChoice;
+    }
+
+    public Float getPercentageBehind() {
+        return percentageBehind;
+    }
+
 }

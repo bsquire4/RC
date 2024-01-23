@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="VB" alignment="CENTER"  spacing="20.0" stylesheets="@MainScreenStyling.css"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.rc.MainScreen" onKeyPressed="#keyTypedEvent">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <Button fx:id="StartBtn" defaultButton="true" disable="false" layoutX="100000"
+            layoutY="100.0" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0"
+            prefWidth="0.0" visible="true"/>
+    <Label fx:id="welcomeText" text="Press any key to start"/>
+    <ImageView fx:id="ImageBox" pickOnBounds="true" preserveRatio="true"/>
+
+    <HBox fx:id="HB" alignment="BOTTOM_CENTER" prefHeight="1000" prefWidth="1000" spacing="15">
+        <Button fx:id="Btn1" defaultButton="false" maxWidth="1000" onAction="#onChoiceBtn1Click" prefHeight="150"
+                text="Hello!" visible="false"/>
+        <Button fx:id="Btn2" defaultButton="false" maxWidth="1000" onAction="#onChoiceBtn2Click" prefHeight="150"
+                text="Hello!" visible="false"/>
+        <Button fx:id="Btn3" defaultButton="false" maxWidth="1000" onAction="#onChoiceBtn3Click" prefHeight="150"
+                text="Hello!" visible="false"/>
+        <Button fx:id="Btn4" defaultButton="false" maxWidth="1000" onAction="#onChoiceBtn4Click" prefHeight="150"
+                text="Hello!" visible="false"/>
+        <Button fx:id="Btn5" defaultButton="false" maxWidth="1000" onAction="#onChoiceBtn5Click" prefHeight="150"
+                text="Other" visible="false"/>
+    </HBox>
+</VBox>

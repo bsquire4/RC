@@ -1,0 +1,101 @@
+/* Setting the black background */
+.root {
+    -fx-background-color: #303030;
+        -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+
+}
+
+/* Label styling */
+#welcomeText {
+    -fx-font-size: 48px;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* VBox styling */
+#VBoxHolder > VBox {
+    -fx-spacing: 20px;
+}
+
+/* Button styling */
+#SingleViewBtn,
+#GlanceViewBtn,
+#RandomViewBtn,
+#StartBtnSVB,
+#StartBtnRVB,
+#StartBtnBVB {
+    -fx-background-color: #8E44AD;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+        -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+}
+
+/* Hover effect for buttons */
+#SingleViewBtn:hover,
+#GlanceViewBtn:hover,
+#RandomViewBtn:hover,
+#StartBtnSVB:hover,
+#StartBtnRVB:hover,
+#StartBtnBVB:hover {
+    -fx-background-color: #825D7E;
+}
+
+/* ChoiceBox styling */
+.choice-box {
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #555555;
+    -fx-text-fill: #FFFFFF;
+        -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+}
+
+/* Label inside VBoxes */
+#SingleViewBox > Label,
+#RandomVewBox > Label,
+#GlanceViewBox > Label,
+ #SingleViewBox > HBox > Label,
+ #RandomVewBox > HBox > Label,
+ #GlanceViewBox > HBox > Label{
+        -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* CheckBox styling */
+.check-box > .box {
+    -fx-background-color: #555555;
+    -fx-border-color: #FFFFFF;
+}
+
+.check-box:selected > .box {
+    -fx-background-color: #333333;
+    -fx-border-color: #FFFFFF;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: #FFFFFF;
+}
+
+/* Background color of the whole context menu */
+.choice-box .context-menu {
+    -fx-background-color: black;
+}
+
+/* Focused item background color in the list */
+.choice-box .menu-item:focused {
+    -fx-background-color: #8E44AD;
+}
+
+/* Text color of non-focused items in the list */
+.choice-box .menu-item > .label {
+    -fx-text-fill: white;
+}
+
+/* Text color of focused item in the list */
+.choice-box .menu-item:focused > .label {
+    -fx-text-fill: black;
+}

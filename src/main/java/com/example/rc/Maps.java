@@ -1,5 +1,7 @@
 package com.example.rc;
 
+import java.util.Arrays;
+
 public class Maps {
     private String Blanklocation;
     private String RouteLocation;
@@ -22,6 +24,19 @@ public class Maps {
         this.distances = distances;
     }
 
+    @Override
+    public String toString() {
+        return "Maps{" +
+                "Blanklocation='" + Blanklocation + '\'' +
+                ", RouteLocation='" + RouteLocation + '\'' +
+                ", DistanceLocation='" + DistanceLocation + '\'' +
+                ", numChoices=" + numChoices +
+                ", colours=" + Arrays.toString(colours) +
+                ", correctChoice=" + correctChoice +
+                ", id=" + id +
+                ", distances=" + Arrays.toString(distances) +
+                '}';
+    }
 
     public String getBlanklocation() {
         return Blanklocation;

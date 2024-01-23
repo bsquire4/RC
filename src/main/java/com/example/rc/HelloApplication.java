@@ -3,7 +3,6 @@ package com.example.rc;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -14,8 +13,9 @@ import java.util.Scanner;
 
 public class HelloApplication extends Application {
     public static List<Maps> importedMaps = new ArrayList<>();
-    public static List<Choices> choicesList = new ArrayList<Choices>();
+    public static List<Choices> choicesList = new ArrayList<>();
     public static GameModeSettings gameModeSettings = new GameModeSettings();
+    public static List<Integer> avaliableMaps = new ArrayList<>();
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -23,9 +23,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+        MainScreen.SetStage(stage);
         stage.show();
         getMaps();
-        HelloController.SetStart(stage);
     }
 
     public static void main(String[] args) {
@@ -78,9 +78,9 @@ public class HelloApplication extends Application {
                 System.out.println("CYCLE COMPLETE");
 
                 String[] tempA_colours = temp_colours.toArray(new String[0]);
-//                Integer[] tempA_distances = ((Integer[]) temp_distances.toArray());
                 int[] tempA_distances = temp_distances.stream().mapToInt(i -> i).toArray();
-
+                temp_colours.clear();
+                temp_distances.clear();
                 importedMaps.add(new Maps(temp_id,temp_Blanklocation,temp_Routelocation, temp_Distancelocation, temp_numChoices, temp_correctchoice,tempA_colours,tempA_distances));
             }
             scanner.close();
@@ -89,6 +89,19 @@ public class HelloApplication extends Application {
         {
             System.out.println("ERROR READING FILE");
             System.out.println(e);
+        }
+
+
+        try{
+            Scanner scanner = new Scanner(new File("../UsersMapsNotDone.csv"));
+            scanner.useDelimiter(",");
+            while (scanner.hasNext())
+            {
+                avaliableMaps.add(Integer.valueOf(scanner.next()));
+            }
+        }catch (Exception e)
+        {
+            System.out.println("ERROR READING AVALIABLEMAPS FILE // " + e);
         }
 
     }

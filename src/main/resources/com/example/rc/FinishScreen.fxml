@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.rc.FinishScreen"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="1000.0" prefWidth="1000.0" VBox.vgrow="ALWAYS"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.rc.FinishScreen" fx:id="borderPane" stylesheets="@FinishScreenStyling.css">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <top>
+        <Label fx:id="welcomeText" alignment="TOP_CENTER" prefHeight="14.0" prefWidth="10000.0" text="Congrats"
+               wrapText="true" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="100"/>
+            </font>
+        </Label>
+    </top>
+    <left>
+        <PieChart fx:id="pieChart" labelsVisible="false"/>
+    </left>
+    <right>
+        <LineChart fx:id="lineChart">
+            <xAxis>
+                <NumberAxis fx:id="XnumberAxis" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="YnumberAxis" side="LEFT"/>
+            </yAxis>
+        </LineChart>
+    </right>
+    <bottom>
+        <HBox>
+            <Button fx:id="ReviewAllBtn" onAction="#reviewAllBtnPressed" />
+            <Button fx:id="ReviewIncorrectBtn" onAction="#reviewIncorrectBtnPressed" />
+        </HBox>
+    </bottom>
+</BorderPane>

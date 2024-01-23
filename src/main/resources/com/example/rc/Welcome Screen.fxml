@@ -4,93 +4,117 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rc.WelcomeScreen">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      stylesheets="@WelcomeScreenStyling.css"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rc.WelcomeScreen">
     <padding>
         <Insets bottom="20.0" left="20.0" right="10.0" top="20.0"/>
     </padding>
-    <Button onAction="#start"></Button>
-    <Label fx:id="welcomeText" alignment="TOP_CENTER" prefHeight="14.0" prefWidth="10000.0" text="Choose Game Mode" wrapText="true">
+    <Label fx:id="welcomeText" alignment="TOP_CENTER" prefHeight="14.0" prefWidth="10000.0" text="Choose Game Mode"
+           wrapText="true">
         <font>
             <Font size="100"/>
         </font>
     </Label>
 
     <HBox prefHeight="1000.0" prefWidth="1000" spacing="40" alignment="CENTER">
-        <Button fx:id="SingleViewBtn" onAction="#onSingleBtnPress" maxWidth="1000" mnemonicParsing="false" text="Single View" HBox.hgrow="ALWAYS" alignment="CENTER"/>
-        <Button fx:id="GlanceViewBtn" onAction="#onGlanceBtnPress" maxWidth="1000" mnemonicParsing="false" text="Glance View" HBox.hgrow="ALWAYS" alignment="CENTER"/>
-        <Button fx:id="RandomViewBtn" onAction="#onRandomBtnPress" maxWidth="1000" mnemonicParsing="false" text="Random View" HBox.hgrow="ALWAYS" alignment="CENTER"/>
+        <Button fx:id="SingleViewBtn" onAction="#onSingleBtnPress" maxWidth="1000" mnemonicParsing="false"
+                text="Single View" HBox.hgrow="ALWAYS" alignment="CENTER"/>
+        <Button fx:id="GlanceViewBtn" onAction="#onGlanceBtnPress" maxWidth="1000" mnemonicParsing="false"
+                text="Glance View" HBox.hgrow="ALWAYS" alignment="CENTER"/>
+        <Button fx:id="RandomViewBtn" onAction="#onRandomBtnPress" maxWidth="1000" mnemonicParsing="false"
+                text="Random View" HBox.hgrow="ALWAYS" alignment="CENTER"/>
     </HBox>
-<VBox fx:id="VBoxHolder">
-    <VBox fx:id="SingleViewBox" prefHeight="Infinity" prefWidth="200.0" spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS" visible="false" disable="true">
-        <Label fx:id="SVBintroText" alignment="CENTER" prefHeight="14.0" prefWidth="10000.0" text="XXXXX Explanation XXXXX" wrapText="true">
-            <font>
-                <Font size="50"/>
-            </font>
-        </Label>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Time Limit" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="SVBtimechoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Number of RCs" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="SVBnumberchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Do you want to start with a blank map or a map with routes on?" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="SVBmapchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <Button fx:id="StartBtnSVB" onAction="#onStartBtnPress" prefWidth="400" prefHeight="150" mnemonicParsing="false" text="Start !" alignment="BOTTOM_CENTER"/>
+    <VBox fx:id="VBoxHolder">
+        <VBox fx:id="SingleViewBox" prefHeight="Infinity" prefWidth="200.0" spacing="20" alignment="CENTER"
+              VBox.vgrow="ALWAYS" visible="false" disable="true">
+            <Label fx:id="SVBintroText" alignment="CENTER" minHeight="-Infinity" prefWidth="10000.0"
+                   textAlignment="CENTER"
+                   text="View the map for a set period of time, or infinitely, before making your choice"
+                   wrapText="true">
+                <font>
+                    <Font size="50"/>
+                </font>
+            </Label>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="Time Limit" wrapText="true" HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="SVBtimechoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="Number of RCs" wrapText="true" HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="SVBnumberchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0"
+                       text="Do you want to start with a blank map or a map with routes on?" wrapText="true"
+                       HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="SVBmapchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Button fx:id="StartBtnSVB" onAction="#onStartBtnPress" prefWidth="400" prefHeight="150"
+                    mnemonicParsing="false" text="Start !" alignment="BOTTOM_CENTER"/>
+        </VBox>
+
+        <VBox fx:id="RandomVewBox" prefHeight="Infinity" prefWidth="200.0" spacing="20" alignment="CENTER"
+              VBox.vgrow="ALWAYS" visible="false" disable="true">
+            <Label fx:id="RVBintroText" alignment="CENTER" minHeight="-Infinity" prefWidth="10000.0"
+                   textAlignment="CENTER"
+                   text="The map will show at random internals, either a set number of times or infinitely till you make your choice"
+                   wrapText="true">
+                <font>
+                    <Font size="50"/>
+                </font>
+            </Label>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="How many glances do you want?" wrapText="true"
+                       HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="RVBglancechoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="Number of RCs" wrapText="true" HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="RVBnumberchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0"
+                       text="Do you want to start with a blank map or a map with routes on?" wrapText="true"
+                       HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="RVBmapchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Button fx:id="StartBtnRVB" onAction="#onStartBtnPress" prefWidth="400" prefHeight="150"
+                    mnemonicParsing="false" text="Start !" alignment="BOTTOM_CENTER"/>
+        </VBox>
+
+        <VBox fx:id="GlanceViewBox" prefHeight="Infinity" prefWidth="200.0" spacing="20" alignment="CENTER"
+              VBox.vgrow="ALWAYS" visible="false" disable="true">
+            <Label fx:id="BVBintroText" alignment="CENTER" prefWidth="10000.0" minHeight="-Infinity"
+                   textAlignment="CENTER"
+                   text="The map will blink on and off, simulating glances, a set number of times or you can toggle it on and off yourself using 'q'"
+                   wrapText="true">
+                <font>
+                    <Font size="50"/>
+                </font>
+            </Label>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="How long do you want a glance to be?" wrapText="true"
+                       HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="BVBtimelengthchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="How many glances do you want?" wrapText="true"
+                       HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="GVBglancechoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0" text="Number of RCs" wrapText="true" HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="GVBnumberchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS" prefWidth="10000">
+                <Label prefHeight="14.0" prefWidth="750.0"
+                       text="Do you want to start with a blank map or a map with routes on?" wrapText="true"
+                       HBox.hgrow="ALWAYS"/>
+                <ChoiceBox fx:id="GVBmapchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Button fx:id="StartBtnBVB" onAction="#onStartBtnPress" prefWidth="400" prefHeight="150"
+                    mnemonicParsing="false" text="Start !" alignment="BOTTOM_CENTER"/>
+        </VBox>
     </VBox>
-
-    <VBox fx:id="RandomVewBox" prefHeight="Infinity" prefWidth="200.0" spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS" visible="false" disable="true">
-        <Label fx:id="RVBintroText" alignment="CENTER" prefHeight="14.0" prefWidth="10000.0" text="XXXXX Explanation XXXXX" wrapText="true">
-            <font>
-                <Font size="50"/>
-            </font>
-        </Label>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="How many glances do you want?" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="RVBglancechoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Number of RCs" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="RVBnumberchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Do you want to start with a blank map or a map with routes on?" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="RVBmapchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <Button fx:id="StartBtnRVB" onAction="#onStartBtnPress" prefWidth="400" prefHeight="150" mnemonicParsing="false" text="Start !" alignment="BOTTOM_CENTER"/>
-    </VBox>
-
-    <VBox fx:id="BlinkViewBox" prefHeight="Infinity" prefWidth="200.0" spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS" visible="false" disable="true">
-        <Label fx:id="BVBintroText" alignment="CENTER" prefHeight="14.0" prefWidth="10000.0" text="XXXXX Explanation XXXXX" wrapText="true">
-            <font>
-                <Font size="50"/>
-            </font>
-        </Label>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="How long do you want a glance to be?" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="BVBtimelengthchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="How many glances do you want?" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="BVBglancechoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Number of RCs" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="BVBnumberchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <HBox spacing="250" alignment="CENTER" VBox.vgrow="ALWAYS">
-            <Label prefHeight="14.0" prefWidth="250.0" text="Do you want to start with a blank map or a map with routes on?" wrapText="true" HBox.hgrow="ALWAYS"/>
-            <ChoiceBox fx:id="BVBmapchoiceBox" prefHeight="14" prefWidth="250.0" HBox.hgrow="ALWAYS"/>
-        </HBox>
-        <Button fx:id="StartBtnBVB" onAction="#onStartBtnPress" prefWidth="400" prefHeight="150" mnemonicParsing="false" text="Start !" alignment="BOTTOM_CENTER"/>
-
-    </VBox>
-
-</VBox>
-
-    <HBox fx:id="HELLO" alignment="BOTTOM_CENTER">
-    </HBox>
 </VBox>
