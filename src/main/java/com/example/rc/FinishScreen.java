@@ -8,19 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -28,39 +22,48 @@ import java.util.*;
 public class FinishScreen implements Initializable {
     @FXML
     public BorderPane borderPane;
-    public ImageView ImageBox;
-    public TextArea reviewText;
+    public HBox linechartHolder;
     @FXML
     private PieChart pieChart;
-    @FXML
-    private LineChart lineChart;
-    @FXML
-    private NumberAxis XnumberAxis;
-    @FXML
-    public NumberAxis YnumberAxis;
-
-    private List<UserData> userDataList = new ArrayList<>();
+    private final List<UserData> userDataList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int correctchoices = 0;
         int incorrectchoices = 0;
         float avgPercent = 0;
+        int avgNumGlances = 0;
+        long avgTimeTaken = 0;
 
         for (Choices i : HelloApplication.choicesList) {
+            System.out.println(i.toString());
             if (i.isCorrectChoice()) {
                 correctchoices++;
             } else {
                 incorrectchoices++;
             }
             avgPercent += i.getPercentageBehind();
+            if (Objects.equals(HelloApplication.gameModeSettings.getGameMode(), "GlanceViewMode")) {
+                avgNumGlances += i.getNumGlances();
+            } else {
+                avgTimeTaken += i.getTimeTaken();
+            }
         }
 
         avgPercent = avgPercent / HelloApplication.choicesList.size();
 
+        if (Objects.equals(HelloApplication.gameModeSettings.getGameMode(), "GlanceViewMode")) {
+            avgNumGlances = avgNumGlances / HelloApplication.choicesList.size();
+        } else {
+            avgTimeTaken = avgTimeTaken / HelloApplication.choicesList.size();
+        }
         createPieChart(correctchoices, incorrectchoices);
-        saveData(correctchoices, incorrectchoices, avgPercent);
-        createLineChart();
+        if (Objects.equals(HelloApplication.gameModeSettings.getGameMode(), "GlanceViewMode")) {
+            saveData(correctchoices, incorrectchoices, avgPercent, avgNumGlances);
+        } else {
+            saveData(correctchoices, incorrectchoices, avgPercent, avgTimeTaken);
+        }
+        onLCpercentBtnPress(new ActionEvent());
 //        writeToAvailableFile();
         System.out.println("HELLO");
     }
@@ -91,31 +94,42 @@ public class FinishScreen implements Initializable {
         pieChart.setData(pieChartData);
     }
 
-    private void saveData(int correctChoices, int incorrectChoices, float avgPercentage) {
-        UserData userData = new UserData(LocalDate.now(), correctChoices, incorrectChoices, avgPercentage);
+    private void saveData(int correctChoices, int incorrectChoices, float avgPercentage, long avgtimeTaken) {
+        UserData userData = new UserData(LocalDate.now(), correctChoices, incorrectChoices, avgPercentage, HelloApplication.gameModeSettings.getGameMode(), avgtimeTaken);
         userData.toFile();
         userDataList.add(userData);
+        readData();
+    }
 
+    private void saveData(int correctChoices, int incorrectChoices, float avgPercentage, int avgNumGlances) {
+        UserData userData = new UserData(LocalDate.now(), correctChoices, incorrectChoices, avgPercentage, HelloApplication.gameModeSettings.getGameMode(), avgNumGlances);
+        userData.toFile();
+        userDataList.add(userData);
+        readData();
+    }
+
+    public void readData() {
         try {
             Scanner scanner = new Scanner(new File("../UserData.csv"));
             scanner.useDelimiter(",");
-
-            int tempID;
-            LocalDate tempDate;
-            int tempCorrectChoice;
-            int temptIncorrectChoice;
-            float tempPercent;
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             dtf = dtf.withLocale(Locale.ENGLISH);
 
             while (scanner.hasNext()) {
-                tempID = Integer.parseInt(scanner.next());
-                tempDate = LocalDate.parse(scanner.next(), dtf);
-                tempCorrectChoice = Integer.parseInt(scanner.next());
-                temptIncorrectChoice = Integer.parseInt(scanner.next());
-                tempPercent = Float.parseFloat(scanner.next());
-                userDataList.add(new UserData(tempID, tempDate, tempCorrectChoice, temptIncorrectChoice, tempPercent));
+                int tempID = Integer.parseInt(scanner.next());
+                LocalDate tempDate = LocalDate.parse(scanner.next(), dtf);
+                int tempCorrectChoice = Integer.parseInt(scanner.next());
+                int temptIncorrectChoice = Integer.parseInt(scanner.next());
+                float tempPercent = Float.parseFloat(scanner.next());
+                String tempGameMode = scanner.next();
+                if (Objects.equals(tempGameMode, "GlanceViewMode")) {
+                    int tempNumGlances = Integer.parseInt(scanner.next());
+                    userDataList.add(new UserData(tempID, tempDate, tempCorrectChoice, temptIncorrectChoice, tempPercent, tempGameMode, tempNumGlances));
+                } else {
+                    long tempTimeTaken = Long.parseLong(scanner.next());
+                    userDataList.add(new UserData(tempID, tempDate, tempCorrectChoice, temptIncorrectChoice, tempPercent, tempGameMode, tempTimeTaken));
+                }
             }
             scanner.close();
 
@@ -125,39 +139,85 @@ public class FinishScreen implements Initializable {
         }
     }
 
-    private void createLineChart() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        dtf = dtf.withLocale(Locale.ENGLISH);
-        int maxid = 1;
-        float maxheight = 1;
-        try {
-            XYChart.Series<Number, Number> series = new XYChart.Series();
+    private XYChart.Series<Number, Number> series = new XYChart.Series();
+    private int maxid = 1;
+    private float maxheight = 1;
+    private float minheight = 0;
+    private float tickHeight = 0.1F;
 
-            for (UserData i : userDataList) {
-
-                series.getData().add(new XYChart.Data<Number, Number>(i.getId(), i.getAvgPercentage()));
-                maxid = i.getId();
-                if (i.getAvgPercentage() > maxheight) {
-                    maxheight = i.getAvgPercentage();
-                }
+    public void onLCpercentBtnPress(ActionEvent actionEvent) {
+        XYChart.Series<Number, Number> tempSeries = new XYChart.Series();
+        minheight = 0.9F;
+        maxheight = 1;
+        for (UserData i : userDataList) {
+            tempSeries.getData().add(new XYChart.Data<Number, Number>(i.getId(), i.getAvgPercentage()));
+            maxid = i.getId();
+            if (i.getAvgPercentage() > maxheight) {
+                maxheight = i.getAvgPercentage();
             }
+        }
+        tickHeight = 0.1F;
+        maxheight = (float) Math.round((maxheight * 1.1) * 10)/10;
+        series = tempSeries;
+        createLineChart();
+    }
 
-            NumberAxis YnumberAxis = new NumberAxis(1, maxheight + 0.5, 0.1);
+    public void onLCtimeBtnPress(ActionEvent actionEvent) {
+        XYChart.Series<Number, Number> tempSeries = new XYChart.Series();
+        minheight = 0;
+        maxheight = 1;
+        for (UserData i : userDataList) {
+            if(i.getAvgTimeTaken()>0)
+            {
+                tempSeries.getData().add(new XYChart.Data<Number, Number>(i.getId(), i.getAvgTimeTaken()));
+
+            }
+            maxid = i.getId();
+            if (i.getAvgTimeTaken() > maxheight) {
+                maxheight = i.getAvgTimeTaken();
+            }
+        }
+        tickHeight = Math.round((maxheight / 10) / 10) * 10;
+        maxheight = (float) Math.round((maxheight * 1.1) /10) * 10;
+        series = tempSeries;
+        createLineChart();
+    }
+
+    public void onLCglancesBtnpress(ActionEvent actionEvent) {
+        minheight = 0;
+        maxheight = 1;
+        XYChart.Series<Number, Number> tempSeries = new XYChart.Series();
+
+        for (UserData i : userDataList) {
+            if(i.getAvgNumGlances() > 0)
+            {
+                tempSeries.getData().add(new XYChart.Data<Number, Number>(i.getId(), i.getAvgNumGlances()));
+
+            }
+            maxid = i.getId();
+            if (i.getAvgNumGlances() > maxheight) {
+                maxheight = i.getAvgNumGlances();
+            }
+        }
+        tickHeight = Math.round((maxheight / 10));
+        maxheight = (float) (maxheight * 1.1);
+        series = tempSeries;
+        createLineChart();
+    }
+
+    private void createLineChart() {
+        try {
+            linechartHolder.getChildren().removeAll();
+            linechartHolder.getChildren().clear();
+
+            NumberAxis YnumberAxis = new NumberAxis(minheight, maxheight, tickHeight);
             NumberAxis XnumberAxis = new NumberAxis(0, maxid, 1);
-            LineChart lineChart = new LineChart<Number, Number>(XnumberAxis, YnumberAxis);
+            LineChart<Number, Number> lineChart = new LineChart<Number, Number>(XnumberAxis, YnumberAxis);
             lineChart.getData().add(series);
             lineChart.setCreateSymbols(false);
             lineChart.setLegendVisible(false);
             lineChart.setAxisSortingPolicy(LineChart.SortingPolicy.X_AXIS);
-            borderPane.setRight(lineChart);
-//
-//            XnumberAxis.setLowerBound(0);
-//            XnumberAxis.setUpperBound(maxid);
-//            XnumberAxis.setTickUnit(1);
-//            YnumberAxis.setLowerBound(1);
-//            YnumberAxis.setUpperBound(2);
-//            YnumberAxis.setTickUnit(0.1);
-
+            linechartHolder.getChildren().add(lineChart);
         } catch (Exception e) {
             System.out.println("HERE");
             System.out.println(e);
@@ -184,17 +244,7 @@ public class FinishScreen implements Initializable {
 
     public void reviewAllBtnPressed(ActionEvent event) {
         try {
-            Stage stage = new Stage();
-            Scene currentScene = pieChart.getScene();
-            Stage currentStage = (Stage) currentScene.getWindow();
-            currentStage.close();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ReviewScreen.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-            stage.setTitle("Hello!");
-            stage.setScene(scene);
-            MainScreen.SetStage(stage);
-            stage.show();
+            loadReviewPage();
             ReviewScreen.reviewAll = true;
         } catch (Exception e) {
             System.out.println(e);
@@ -202,19 +252,23 @@ public class FinishScreen implements Initializable {
 
     }
 
+    private void loadReviewPage() throws java.io.IOException {
+        Stage stage = new Stage();
+        Scene currentScene = pieChart.getScene();
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.close();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ReviewScreen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        MainScreen.SetStage(stage);
+        stage.show();
+    }
+
     public void reviewIncorrectBtnPressed(ActionEvent event) {
         try {
-            Stage stage = new Stage();
-            Scene currentScene = pieChart.getScene();
-            Stage currentStage = (Stage) currentScene.getWindow();
-            currentStage.close();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ReviewScreen.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-            stage.setTitle("Hello!");
-            stage.setScene(scene);
-            MainScreen.SetStage(stage);
-            stage.show();
+            loadReviewPage();
             ReviewScreen.reviewAll = false;
         } catch (Exception e) {
             System.out.println(e);

@@ -1,25 +1,26 @@
 package com.example.rc;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.awt.*;
-import java.awt.event.KeyListener;
+import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ReviewScreen {
+public class ReviewScreen implements Initializable {
     @FXML
     Label reviewText;
     int imageCounter = 0;
     @FXML
     ImageView ImageBox;
+
     @FXML
 
 
@@ -33,11 +34,7 @@ public class ReviewScreen {
         }
         try {
             InputStream stream;
-            if (imageFiles[imageCounter] == null) {
-                stream = new FileInputStream("C:/Users/Ben04/Downloads/EM104989.jpg");
-            } else {
-                stream = new FileInputStream(imageFiles[imageCounter]);
-            }
+            stream = new FileInputStream(imageFiles[imageCounter]);
             Image image = new Image(stream);
             ImageBox.setImage(image);
             System.out.println(("IMAGE SET"));
@@ -52,13 +49,18 @@ public class ReviewScreen {
     public int choiceCounter = 0;
 
     public static boolean reviewAll;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        nextMap();
+    }
+
     public void nextMap() {
-        if(choiceCounter < HelloApplication.choicesList.size())
-        {
+        if (choiceCounter < HelloApplication.choicesList.size()) {
             currentChoice = HelloApplication.choicesList.get(choiceCounter);
             choiceCounter++;
             imageCounter = 0;
-            if (reviewAll == false && currentChoice.getPercentageBehind() == 1) {
+            if (!reviewAll && currentChoice.getPercentageBehind() == 1) {
                 nextMap();
             } else {
                 currentMap = null;
@@ -76,16 +78,30 @@ public class ReviewScreen {
                 if (currentChoice.isCorrectChoice()) {
                     reviewText.setText("YOU GOT THIS ONE CORRECT. WELL DONE !");
                 } else {
-                    //work out which chocice the user made using the percentage behind
-                    reviewText.setText("YOU DID NOT GET THIS ONE RIGHT. YOU WERE " + ((currentChoice.getPercentageBehind() * 100) - 100) + " PERCENT BEHIND");
+                    //work out which choice the user made using the percentage behind
+                    reviewText.setText("YOU DID NOT GET THIS ONE RIGHT. YOU WERE " + ((currentChoice.getPercentageBehind() * 100) - 100) + " PERCENT BEHIND. IT TOOK YOU " + currentChoice.getTimeTaken() + " MILLISECONDS TO CHOOSE!");
                 }
             }
-        }else {
+        } else {
             System.out.println("RAN OUT OF CHOICES");
+            backBtn();
         }
 
     }
 
-    public void flagBtn(ActionEvent event) {
+    public void flagBtn() {
+        System.out.println("FLAGGED");
+        //need to add a way to actually note down the flagging. Create an alert and allow the user to input the error then save that to a file for me to view
+    }
+
+    public void backBtn() {
+        try {
+            Stage stage = new Stage();
+            Scene currentScene = reviewText.getScene();
+            MainScreen.LoadFinishScreen(stage, currentScene);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 }

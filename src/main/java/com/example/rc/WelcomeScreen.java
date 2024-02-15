@@ -2,7 +2,6 @@ package com.example.rc;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -36,7 +35,6 @@ public class WelcomeScreen implements Initializable {
         RandomVewBox.setDisable(true);
 
         ObservableList<String> tempList = FXCollections.observableArrayList();
-        ;
         tempList.add("Blank Map");
         tempList.add("Route Map");
         SVBmapchoiceBox.setItems(tempList);
@@ -48,7 +46,6 @@ public class WelcomeScreen implements Initializable {
 
 
         ObservableList<String> tempLst2 = FXCollections.observableArrayList();
-        ;
         tempLst2.add("2");
         tempLst2.add("4");
         tempLst2.add("8");
@@ -61,7 +58,6 @@ public class WelcomeScreen implements Initializable {
 
 
         ObservableList<String> tempList3 = FXCollections.observableArrayList();
-        ;
         tempList3.add("5");
         tempList3.add("10");
         tempList3.add("20");
@@ -75,7 +71,6 @@ public class WelcomeScreen implements Initializable {
         GVBnumberchoiceBox.setValue("10");
 
         ObservableList<String> tempList4 = FXCollections.observableArrayList();
-        ;
         tempList4.add("1");
         tempList4.add("2");
         tempList4.add("4");
@@ -85,7 +80,6 @@ public class WelcomeScreen implements Initializable {
         RVBglancechoiceBox.setValue("4");
 
         ObservableList<String> tempList5 = FXCollections.observableArrayList();
-        ;
         tempList5.add("0.5");
         tempList5.add("1");
         tempList5.add("1.5");
@@ -94,10 +88,10 @@ public class WelcomeScreen implements Initializable {
         BVBtimelengthchoiceBox.setItems(tempList5);
         BVBtimelengthchoiceBox.setValue("Toggle view with 'q'");
 
-        onSingleBtnPress(new ActionEvent());
+        onSingleBtnPress();
     }
 
-    public void onSingleBtnPress(ActionEvent event) {
+    public void onSingleBtnPress() {
         SingleViewBox.setDisable(false);
         SingleViewBox.setVisible(true);
         RandomVewBox.setDisable(true);
@@ -106,7 +100,7 @@ public class WelcomeScreen implements Initializable {
         GlanceViewBox.setVisible(false);
     }
 
-    public void onGlanceBtnPress(ActionEvent event) {
+    public void onGlanceBtnPress() {
         SingleViewBox.setDisable(true);
         SingleViewBox.setVisible(false);
         RandomVewBox.setDisable(true);
@@ -115,7 +109,7 @@ public class WelcomeScreen implements Initializable {
         GlanceViewBox.setVisible(true);
     }
 
-    public void onRandomBtnPress(ActionEvent event) {
+    public void onRandomBtnPress() {
         SingleViewBox.setDisable(true);
         SingleViewBox.setVisible(false);
         RandomVewBox.setDisable(false);

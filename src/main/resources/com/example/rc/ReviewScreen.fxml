@@ -6,27 +6,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
-<BorderPane xmlns="http://javafx.com/javafx"
+<?import javafx.geometry.Insets?>
+<BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.rc.ReviewScreen"
-            prefHeight="400.0" prefWidth="600.0">
+            stylesheets="@MainCSS.css">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
     <left>
         <VBox fx:id="VBImageContainer" alignment="CENTER" maxHeight="500.0" maxWidth="1000.0" spacing="10.0"
               prefWidth="550" VBox.vgrow="ALWAYS">
             <ImageView fx:id="ImageBox" pickOnBounds="true" preserveRatio="true" fitHeight="400" fitWidth="600"/>
-            <Button fx:id="ToggleImage" onAction="#changeImage" prefWidth="150.0" text="Toggle the Map Image"
+            <Button fx:id="ToggleImage" onAction="#changeImage" prefWidth="300.0" text="Toggle the Map Image"
                     BorderPane.alignment="CENTER"/>
         </VBox>
     </left>
     <right>
         <VBox alignment="CENTER" maxHeight="500.0" maxWidth="1000.0" spacing="10.0"
               prefWidth="550" VBox.vgrow="ALWAYS">
-            <Label fx:id="reviewText" text="EXAMPLE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            <Label fx:id="reviewText" text="EXAMPLE" alignment="CENTER" textAlignment="CENTER"
                    wrapText="true"/>
-            <Button fx:id="NextMapBtn" onAction="#nextMap" prefWidth="150.0" text="Next map"
+            <Button fx:id="NextMapBtn" onAction="#nextMap" prefWidth="250.0" text="Next map"
                     BorderPane.alignment="CENTER"/>
-            <Button fx:id="FlagBtn" onAction="#flagBtn" prefWidth="150.0" text="Flag this map for an error"
+            <Button fx:id="FlagBtn" onAction="#flagBtn" prefWidth="250.0" text="Flag this map for an error"
                     BorderPane.alignment="CENTER"/>
+            <Button fx:id="BackBtn" onAction="#backBtn" prefWidth="250.0" text="Return To Review Screen"
+                    BorderPane.alignment="CENTER"/>
+
         </VBox>
     </right>
 </BorderPane>

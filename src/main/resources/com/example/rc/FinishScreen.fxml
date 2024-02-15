@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Button?>
 <BorderPane maxHeight="1000.0" maxWidth="1000.0" prefHeight="1000.0" prefWidth="1000.0" VBox.vgrow="ALWAYS"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.rc.FinishScreen" fx:id="borderPane" stylesheets="@FinishScreenStyling.css">
+            fx:controller="com.example.rc.FinishScreen" fx:id="borderPane" stylesheets="@MainCSS.css">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -25,19 +25,20 @@
         <PieChart fx:id="pieChart" labelsVisible="false"/>
     </left>
     <right>
-        <LineChart fx:id="lineChart">
-            <xAxis>
-                <NumberAxis fx:id="XnumberAxis" side="BOTTOM"/>
-            </xAxis>
-            <yAxis>
-                <NumberAxis fx:id="YnumberAxis" side="LEFT"/>
-            </yAxis>
-        </LineChart>
+        <VBox alignment="CENTER">
+            <HBox spacing="40" alignment="CENTER" prefWidth="600">
+                <Button fx:id="LCpercent" onAction="#onLCpercentBtnPress" text="'%' accuracy" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                <Button fx:id="LCtime" onAction="#onLCtimeBtnPress" text="Time taken" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                <Button fx:id="LCglances" onAction="#onLCglancesBtnpress" text="Glances needed" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox fx:id="linechartHolder" alignment="CENTER"/>
+        </VBox>
     </right>
     <bottom>
-        <HBox>
-            <Button fx:id="ReviewAllBtn" onAction="#reviewAllBtnPressed" />
-            <Button fx:id="ReviewIncorrectBtn" onAction="#reviewIncorrectBtnPressed" />
+        <HBox spacing="40" alignment="CENTER">
+            <Button fx:id="ReviewAllBtn" onAction="#reviewAllBtnPressed" text="Review All Maps" prefWidth="250.0"/>
+            <Button fx:id="ReviewIncorrectBtn" onAction="#reviewIncorrectBtnPressed" text="Review Incorrect Maps"
+                    prefWidth="250.0"/>
         </HBox>
     </bottom>
 </BorderPane>

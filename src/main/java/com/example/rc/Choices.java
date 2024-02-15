@@ -1,20 +1,24 @@
 package com.example.rc;
 
-import java.time.LocalDate;
-
 public class Choices {
-    private int id;
-    private boolean correctChoice;
-    private Float percentageBehind;
+    private final int id;
+    private final boolean correctChoice;
+    private final Float percentageBehind;
+    private int numGlances;
+    private long timeTaken;
 
-    public Choices(int id, Float percentageBehind) {
+    public Choices(int id, Float percentageBehind, int numGlances) {
         this.id = id;
         this.percentageBehind = percentageBehind;
-        if (this.percentageBehind == 1) {
-            correctChoice = true;
-        } else {
-            correctChoice = false;
-        }
+        this.numGlances = numGlances;
+        correctChoice = this.percentageBehind == 1;
+    }
+
+    public Choices(int id, Float percentageBehind, long timeTaken) {
+        this.id = id;
+        this.percentageBehind = percentageBehind;
+        this.timeTaken = timeTaken;
+        correctChoice = this.percentageBehind == 1;
     }
 
     @Override
@@ -23,6 +27,8 @@ public class Choices {
                 "id=" + id +
                 ", correctChoice=" + correctChoice +
                 ", percentageBehind=" + percentageBehind +
+                ", numGlances=" + numGlances +
+                ", timeTaken=" + timeTaken +
                 '}';
     }
 
@@ -38,4 +44,11 @@ public class Choices {
         return percentageBehind;
     }
 
+    public int getNumGlances() {
+        return numGlances;
+    }
+
+    public long getTimeTaken() {
+        return timeTaken;
+    }
 }

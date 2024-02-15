@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      stylesheets="@WelcomeScreenStyling.css"
+      stylesheets="@MainCSS.css"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rc.WelcomeScreen">
     <padding>
         <Insets bottom="20.0" left="20.0" right="10.0" top="20.0"/>
@@ -30,7 +30,7 @@
               VBox.vgrow="ALWAYS" visible="false" disable="true">
             <Label fx:id="SVBintroText" alignment="CENTER" minHeight="-Infinity" prefWidth="10000.0"
                    textAlignment="CENTER"
-                   text="View the map for a set period of time, or infinitely, before making your choice"
+                   text="View the map for a set period of time, or infinitely, before making your choice. If playing the blank map, press 'w' to see the map with routes before you make your choice"
                    wrapText="true">
                 <font>
                     <Font size="50"/>
@@ -58,7 +58,7 @@
               VBox.vgrow="ALWAYS" visible="false" disable="true">
             <Label fx:id="RVBintroText" alignment="CENTER" minHeight="-Infinity" prefWidth="10000.0"
                    textAlignment="CENTER"
-                   text="The map will show at random internals, either a set number of times or infinitely till you make your choice"
+                   text="The map will show at random internals, either a set number of times or infinitely till you make your choice. If playing the blank map, press 'w' to see the map with routes before you make your choice"
                    wrapText="true">
                 <font>
                     <Font size="50"/>
@@ -87,7 +87,7 @@
               VBox.vgrow="ALWAYS" visible="false" disable="true">
             <Label fx:id="BVBintroText" alignment="CENTER" prefWidth="10000.0" minHeight="-Infinity"
                    textAlignment="CENTER"
-                   text="The map will blink on and off, simulating glances, a set number of times or you can toggle it on and off yourself using 'q'"
+                   text="The map will blink on and off, simulating glances, a set number of times or you can toggle it on and off yourself using 'q'. If playing the blank map, press 'w' to see the map with routes before you make your choice"
                    wrapText="true">
                 <font>
                     <Font size="50"/>

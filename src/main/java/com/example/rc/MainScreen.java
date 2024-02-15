@@ -23,6 +23,7 @@ import java.awt.event.KeyListener;
 import java.io.*;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MainScreen {
     @FXML
@@ -45,55 +46,55 @@ public class MainScreen {
     private static double height;
     private static int mapCounter = 0;
     private static Maps Map;
-    private static int percentageBehind;
     private int glanceCounter = 0;
     @FXML
     private VBox VB;
+    private long startTime;
+
     @FXML
     protected void onChoiceBtn1Click() {
         System.out.println("Btn1 Pressed -" + Map.getColours()[0]);
         float temp = (float) (Map.getDistances()[0]) / (float) (Map.getDistances()[Map.getCorrectChoice() - 1]);
-        Choices tempchoice = new Choices(Map.id, temp);
-        System.out.println(tempchoice.toString());
-        HelloApplication.choicesList.add(tempchoice);
-        onRoundStart();
+        saveChoice(temp);
     }
 
     @FXML
     protected void onChoiceBtn2Click() {
         System.out.println("Btn2 Pressed -" + Map.getColours()[1]);
         float temp = (float) (Map.getDistances()[1]) / (float) (Map.getDistances()[Map.getCorrectChoice() - 1]);
-        Choices tempchoice = new Choices(Map.id, temp);
-        System.out.println(tempchoice.toString());
-        HelloApplication.choicesList.add(tempchoice);
-        onRoundStart();
+        saveChoice(temp);
     }
 
     @FXML
     protected void onChoiceBtn3Click() {
         System.out.println("Btn3 Pressed -" + Map.getColours()[2]);
         float temp = (float) (Map.getDistances()[2]) / (float) (Map.getDistances()[Map.getCorrectChoice() - 1]);
-        Choices tempchoice = new Choices(Map.id, temp);
-        System.out.println(tempchoice.toString());
-        HelloApplication.choicesList.add(tempchoice);
-        onRoundStart();
+        saveChoice(temp);
     }
 
     @FXML
     protected void onChoiceBtn4Click() {
         System.out.println("Btn4 Pressed -" + Map.getColours()[2]);
         float temp = (float) (Map.getDistances()[3]) / (float) (Map.getDistances()[Map.getCorrectChoice() - 1]);
-        Choices tempchoice = new Choices(Map.id, temp);
-        System.out.println(tempchoice.toString());
-        HelloApplication.choicesList.add(tempchoice);
-        onRoundStart();
+        saveChoice(temp);
     }
 
     @FXML
     protected void onChoiceBtn5Click() {
         System.out.println("Btn5 Pressed - Other");
-        Choices tempchoice = new Choices(Map.id, (float) (int) Arrays.stream(Map.getDistances()).max().getAsInt() / (float) (Map.getDistances()[Map.getCorrectChoice() - 1]));
-        System.out.println(tempchoice.toString());
+        float temp = (float) Arrays.stream(Map.getDistances()).max().getAsInt() / (float) (Map.getDistances()[Map.getCorrectChoice() - 1]);
+        saveChoice(temp);
+    }
+
+    private void saveChoice(float temp) {
+        Choices tempchoice;
+        if (Objects.equals(HelloApplication.gameModeSettings.getGameMode(), "GlanceViewMode")) {
+            tempchoice = new Choices(Map.id, temp, glanceCounter);
+            glanceCounter = 0;
+        } else {
+            System.out.println(System.currentTimeMillis() - startTime);
+            tempchoice = new Choices(Map.id, temp, System.currentTimeMillis() - startTime);
+        }
         HelloApplication.choicesList.add(tempchoice);
         onRoundStart();
     }
@@ -129,9 +130,6 @@ public class MainScreen {
                 mapCounter++;
                 System.out.println(Map.toString());
 
-                Scene tmpscene = HB.getScene();
-
-
                 System.out.println(HelloApplication.gameModeSettings.toString());
                 DisableBtn(Btn1);
                 DisableBtn(Btn2);
@@ -144,9 +142,9 @@ public class MainScreen {
                     case 2:
                         //Btn1,2,5 in use
                         EnableBtn(Btn1);
-                        Btn1.setStyle("-fx-background-color:" + Btn1.getText() +";");
+                        Btn1.setStyle("-fx-background-color:" + Btn1.getText() + ";");
                         EnableBtn(Btn2);
-                        Btn2.setStyle("-fx-background-color:" + Btn2.getText() +";");
+                        Btn2.setStyle("-fx-background-color:" + Btn2.getText() + ";");
                         DisableBtn(Btn3);
                         DisableBtn(Btn4);
 
@@ -165,11 +163,11 @@ public class MainScreen {
                     case 3:
                         //Btn1,2,3,5 in use
                         EnableBtn(Btn1);
-                        Btn1.setStyle("-fx-background-color:" + Btn1.getText() +";");
+                        Btn1.setStyle("-fx-background-color:" + Btn1.getText() + ";");
                         EnableBtn(Btn2);
-                        Btn2.setStyle("-fx-background-color:" + Btn2.getText() +";");
+                        Btn2.setStyle("-fx-background-color:" + Btn2.getText() + ";");
                         EnableBtn(Btn3);
-                        Btn3.setStyle("-fx-background-color:" + Btn3.getText() +";");
+                        Btn3.setStyle("-fx-background-color:" + Btn3.getText() + ";");
                         DisableBtn(Btn4);
 
                         VB.setOnKeyPressed(event -> {
@@ -189,13 +187,13 @@ public class MainScreen {
                     case 4:
                         //Btn 1,2,3,4,5 in use
                         EnableBtn(Btn1);
-                        Btn1.setStyle("-fx-background-color:" + Btn1.getText() +";");
+                        Btn1.setStyle("-fx-background-color:" + Btn1.getText() + ";");
                         EnableBtn(Btn2);
-                        Btn2.setStyle("-fx-background-color:" + Btn2.getText() +";");
+                        Btn2.setStyle("-fx-background-color:" + Btn2.getText() + ";");
                         EnableBtn(Btn3);
-                        Btn3.setStyle("-fx-background-color:" + Btn3.getText() +";");
+                        Btn3.setStyle("-fx-background-color:" + Btn3.getText() + ";");
                         EnableBtn(Btn4);
-                        Btn4.setStyle("-fx-background-color:" + Btn4.getText() +";");
+                        Btn4.setStyle("-fx-background-color:" + Btn4.getText() + ";");
 
                         VB.setOnKeyPressed(event -> {
                             keyTypedEvent(event);
@@ -225,34 +223,57 @@ public class MainScreen {
 
                 // Play the timeline
                 System.out.println(HelloApplication.gameModeSettings.getTimeLength());
-                Scene tmpscene2 = Btn1.getScene();
-
+                startTime = System.currentTimeMillis();
                 switch (HelloApplication.gameModeSettings.getGameMode()) {
                     case "SingleViewMode":
                         if (HelloApplication.gameModeSettings.getTimeLength() == 0) {
                             changeImage();
+                            // on w pressed change to Route Map if it is currently a blank map
                         } else {
                             System.out.println("SVM");
-                            timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
-                                changeImage();
-                            }), new KeyFrame(Duration.seconds(HelloApplication.gameModeSettings.getTimeLength()), event -> {
-                                changeImage();
-                            }));
+                            if (!HelloApplication.gameModeSettings.isMapRoute()) {
+                                timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
+                                    changeImage();
+                                }), new KeyFrame(Duration.seconds(HelloApplication.gameModeSettings.getTimeLength()), event -> {
+                                    changeImageToRoutes();
+                                }));
+                            } else {
+                                timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
+                                    changeImage();
+                                }), new KeyFrame(Duration.seconds(HelloApplication.gameModeSettings.getTimeLength()), event -> {
+                                    changeImage();
+                                }));
+                            }
+
                             timeline.setCycleCount(1);
                             timeline.play();
-                        }
+                            VB.setOnKeyReleased(event ->
+                                    {
+                                        System.out.println("RELEASED");
+                                        if (event.getCode() == KeyCode.W && !HelloApplication.gameModeSettings.isMapRoute()) {
+                                            timeline.stop();
+                                            changeImageToRoutes();
+                                        }
 
+                                    }
+                            );
+
+                        }
                         break;
                     case "GlanceViewMode":
                         if (HelloApplication.gameModeSettings.getGlanceTimeLength() == 0) {
                             changeImage();
+                            final boolean[] wPressed = {false};
 
-                            VB.setOnKeyPressed( event -> {
-                                VB.getOnKeyPressed();
-                                if (event.getCharacter() == "q" && glanceCounter < 2 * HelloApplication.gameModeSettings.getNumGlances()) {
+                            VB.setOnKeyReleased(event -> {
+                                if (!wPressed[0] && event.getCode() == KeyCode.Q && glanceCounter < 2 * HelloApplication.gameModeSettings.getNumGlances()) {
                                     changeImage();
                                     glanceCounter++;
+                                } else if (event.getCode() == KeyCode.W && !HelloApplication.gameModeSettings.isMapRoute()) {
+                                    wPressed[0] = true;
+                                    changeImageToRoutes();
                                 }
+
                             });
                         } else {
                             timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> {
@@ -263,9 +284,31 @@ public class MainScreen {
                             if (HelloApplication.gameModeSettings.getNumGlances() == 0) {
                                 timeline.setCycleCount(Timeline.INDEFINITE);
                                 timeline.play();
+                                VB.setOnKeyReleased(event ->
+                                        {
+                                            System.out.println("RELEASED");
+                                            if (event.getCode() == KeyCode.W && !HelloApplication.gameModeSettings.isMapRoute()) {
+                                                timeline.stop();
+                                                changeImageToRoutes();
+                                            }
+
+                                        }
+                                );
                             } else {
                                 timeline.setCycleCount(HelloApplication.gameModeSettings.getNumGlances());
                                 timeline.play();
+                                timeline.setOnFinished(event -> changeImageToRoutes());
+
+                                VB.setOnKeyReleased(event ->
+                                        {
+                                            System.out.println("RELEASED");
+                                            if (event.getCode() == KeyCode.W && !HelloApplication.gameModeSettings.isMapRoute()) {
+                                                timeline.stop();
+                                                changeImageToRoutes();
+                                            }
+
+                                        }
+                                );
                             }
                         }
 
@@ -280,24 +323,50 @@ public class MainScreen {
                         if (HelloApplication.gameModeSettings.getNumGlances() == 0) {
                             timeline.setCycleCount(Timeline.INDEFINITE);
                             timeline.play();
+                            VB.setOnKeyReleased(event ->
+                                    {
+                                        System.out.println("RELEASED");
+                                        if (event.getCode() == KeyCode.W && !HelloApplication.gameModeSettings.isMapRoute()) {
+                                            timeline.stop();
+                                            changeImageToRoutes();
+                                        }
+
+                                    }
+                            );
+
                         } else {
                             timeline.setCycleCount(HelloApplication.gameModeSettings.getNumGlances());
                             timeline.play();
+                            timeline.setOnFinished(event -> changeImageToRoutes());
+
+                            VB.setOnKeyReleased(event ->
+                                    {
+                                        System.out.println("RELEASED");
+                                        if (event.getCode() == KeyCode.W && !HelloApplication.gameModeSettings.isMapRoute()) {
+                                            timeline.stop();
+                                            changeImageToRoutes();
+                                        }
+
+                                    }
+                            );
                         }
+
                         break;
                     default:
                         System.out.println("ERROR setting Game Mode");
                         break;
                 }
-
-            } catch (Exception e) {
+            } catch (
+                    Exception e) {
                 System.out.println(e);
             }
-
         } else {
-            System.out.println("RAN OUT OF MAPS!!!!!!!");
-            //alert saying ran out of maps
-            //go to Finish Screen
+            System.out.
+
+                    println("RAN OUT OF MAPS!!!!!!!");
+
+//alert saying ran out of maps
+//go to Finish Screen
             Ending();
         }
     }
@@ -329,7 +398,7 @@ public class MainScreen {
     private void changeImage() {
         try {
             System.out.println("CHANGE IMAGE CALLED");
-            if (currentMap == true) {
+            if (currentMap) {
                 InputStream steam2 = new FileInputStream("C:/Users/Ben04/Downloads/EM104989.jpg");
                 Image otherImage = new Image(steam2);
                 ImageBox.setImage(otherImage);
@@ -347,35 +416,52 @@ public class MainScreen {
         } catch (Exception e) {
             System.out.println("IMAGE FILE NOT FOUND // " + e);
         }
+    }
+
+    private void changeImageToRoutes() {
+        try {
+            System.out.println("CHANGE IMAGE TO ROUTES CALLED");
+            InputStream stream;
+            stream = new FileInputStream(Map.getRouteLocation());
+            Image image = new Image(stream);
+            ImageBox.setImage(image);
+        } catch (Exception e) {
+            System.out.println("IMAGE FILE NOT FOUND // " + e);
+        }
 
     }
+
 
     private void Ending() {
         try {
             Stage stage = new Stage();
             Scene currentScene = HB.getScene();
-            Stage currentStage = (Stage) currentScene.getWindow();
-            currentStage.close();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FinishScreen.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-            stage.setTitle("Hello!");
-            stage.setScene(scene);
-            MainScreen.SetStage(stage);
-            stage.show();
+            LoadFinishScreen(stage, currentScene);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    static void LoadFinishScreen(Stage stage, Scene currentScene) throws IOException {
+        Stage currentStage = (Stage) currentScene.getWindow();
+        currentStage.close();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FinishScreen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        MainScreen.SetStage(stage);
+        stage.show();
+    }
+
     public void keyTypedEvent(KeyEvent keyEvent) {
         welcomeText.setVisible(false);
         System.out.println("KEY PRESSED: " + keyEvent.getCode());
-        if (started == false) {
+        if (!started) {
             started = true;
             System.out.println("STARTED");
             onRoundStart();
-        } else if (keyEvent.getCode() == KeyCode.ESCAPE ) {
+        } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
             System.out.println("ENDED");
             Ending();
         }

@@ -1,0 +1,191 @@
+/* Setting the black background */
+.root {
+    -fx-background-color: #303030;
+    -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+}
+
+/* Label styling */
+#welcomeText {
+    -fx-font-size: 48px;
+    -fx-text-fill: #FFFFFF;
+}
+
+#reviewText{
+    -fx-font-size: 24px;
+    -fx-text-fill: rgba(132, 49, 173, 0.92);
+}
+
+/* ImageView styling */
+#ImageBox {
+    -fx-fit-height: 200px; /* Adjust the height as needed */
+    -fx-fit-width: 200px; /* Adjust the width as needed */
+}
+
+/* HBox styling */
+#HB {
+    -fx-spacing: 15px;
+}
+
+/* Button styling */
+.button{
+    -fx-background-color: #8E44AD;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+    -fx-transition-duration: 0.3s;
+    -fx-cursor: pointer;
+}
+
+/* Hover effect for buttons */
+.button:hover{
+    -fx-background-color: #825D7E;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.75), 10, 0, 0, 0);
+}
+
+/* LineChart styling */
+#lineChart {
+    -fx-stroke: #FFFFFF;
+    -fx-background-color: transparent;
+}
+
+/* Axis styling */
+.axis {
+    -fx-tick-label-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+}
+
+/* PieChart styling */
+#pieChart {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* PieChart Data styling */
+.default-color0.chart-pie { -fx-pie-color: #825D7E; }
+.default-color1.chart-pie { -fx-pie-color: #8E44AD; }
+.default-color2.chart-pie { -fx-pie-color: #333333; }
+.default-color3.chart-pie { -fx-pie-color: #3498DB; }
+.default-color4.chart-pie { -fx-pie-color: #1ABC9C; }
+
+.chart-pie-label-line {
+    -fx-stroke: #FFFFFF;
+    -fx-stroke-width: 0.5px;
+    -fx-fill: #FFFFFF;
+}
+
+.chart-pie-label {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 1em;
+}
+
+.chart-legend {
+    -fx-background-color: #303030;
+    -fx-font-size: 48px;
+}
+
+.chart-legend-item{
+    -fx-text-fill: #FFFFFF;
+}
+
+/* LineChart Series styling */
+.default-color0.chart-line-symbol,
+.default-color1.chart-line-symbol,
+.default-color2.chart-line-symbol,
+.default-color3.chart-line-symbol,
+.default-color4.chart-line-symbol {
+    -fx-background-radius: 0;
+    -fx-background-color: #825D7E, #8E44AD, #333333, #3498DB, #1ABC9C;
+}
+
+/* LineChart Legend styling */
+LineChart.chart-legend {
+    -fx-background-color: #303030;
+    -fx-font-size: 48px;
+}
+
+.chart-legend-item-symbol {
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+.chart-plot-background {
+    -fx-background-color: #825D7E;
+}
+
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #ffffff;
+    -fx-stroke-dash-array: 12 2 4 2;
+    -fx-stroke-dash-offset: 6;
+}
+
+/* VBox styling */
+#VBoxHolder > VBox {
+    -fx-spacing: 20px;
+}
+
+/* ChoiceBox styling */
+.choice-box {
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #555555;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+}
+
+/* Label inside VBoxes */
+#SingleViewBox > Label,
+#RandomVewBox > Label,
+#GlanceViewBox > Label,
+#SingleViewBox > HBox > Label,
+#RandomVewBox > HBox > Label,
+#GlanceViewBox > HBox > Label{
+    -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* CheckBox styling */
+.check-box > .box {
+    -fx-background-color: #555555;
+    -fx-border-color: #FFFFFF;
+}
+
+.check-box:selected > .box {
+    -fx-background-color: #333333;
+    -fx-border-color: #FFFFFF;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: #FFFFFF;
+}
+
+/* Background color of the whole context menu */
+.choice-box .context-menu {
+    -fx-background-color: black;
+}
+
+/* Focused item background color in the list */
+.choice-box .menu-item:focused {
+    -fx-background-color: #8E44AD;
+}
+
+/* Text color of non-focused items in the list */
+.choice-box .menu-item > .label {
+    -fx-text-fill: white;
+}
+
+/* Text color of focused item in the list */
+.choice-box .menu-item:focused > .label {
+    -fx-text-fill: black;
+}
