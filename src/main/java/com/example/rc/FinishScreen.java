@@ -157,7 +157,7 @@ public class FinishScreen implements Initializable {
             }
         }
         tickHeight = 0.1F;
-        maxheight = (float) Math.round((maxheight * 1.1) * 10)/10;
+        maxheight = (float) Math.round((maxheight * 1.1) * 10) / 10;
         series = tempSeries;
         createLineChart();
     }
@@ -167,18 +167,16 @@ public class FinishScreen implements Initializable {
         minheight = 0;
         maxheight = 1;
         for (UserData i : userDataList) {
-            if(i.getAvgTimeTaken()>0)
-            {
+            if (i.getAvgTimeTaken() > 0) {
                 tempSeries.getData().add(new XYChart.Data<Number, Number>(i.getId(), i.getAvgTimeTaken()));
-
-            }
-            maxid = i.getId();
-            if (i.getAvgTimeTaken() > maxheight) {
-                maxheight = i.getAvgTimeTaken();
+                maxid = i.getId();
+                if (i.getAvgTimeTaken() > maxheight) {
+                    maxheight = i.getAvgTimeTaken();
+                }
             }
         }
         tickHeight = Math.round((maxheight / 10) / 10) * 10;
-        maxheight = (float) Math.round((maxheight * 1.1) /10) * 10;
+        maxheight = (float) Math.round((maxheight * 1.1) / 10) * 10;
         series = tempSeries;
         createLineChart();
     }
@@ -189,14 +187,13 @@ public class FinishScreen implements Initializable {
         XYChart.Series<Number, Number> tempSeries = new XYChart.Series();
 
         for (UserData i : userDataList) {
-            if(i.getAvgNumGlances() > 0)
-            {
+            if (i.getAvgNumGlances() > 0) {
                 tempSeries.getData().add(new XYChart.Data<Number, Number>(i.getId(), i.getAvgNumGlances()));
 
-            }
-            maxid = i.getId();
-            if (i.getAvgNumGlances() > maxheight) {
-                maxheight = i.getAvgNumGlances();
+                maxid = i.getId();
+                if (i.getAvgNumGlances() > maxheight) {
+                    maxheight = i.getAvgNumGlances();
+                }
             }
         }
         tickHeight = Math.round((maxheight / 10));
@@ -240,7 +237,6 @@ public class FinishScreen implements Initializable {
     }
 
     //REVIEWING BELOW
-    boolean reviewAll = true;
 
     public void reviewAllBtnPressed(ActionEvent event) {
         try {
@@ -249,7 +245,6 @@ public class FinishScreen implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
     private void loadReviewPage() throws java.io.IOException {
@@ -274,6 +269,4 @@ public class FinishScreen implements Initializable {
             System.out.println(e);
         }
     }
-
-
 }

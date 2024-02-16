@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -75,13 +76,24 @@ public class ReviewScreen implements Initializable {
                 }
 
                 changeImage();
-                if (currentChoice.isCorrectChoice()) {
-                    reviewText.setText("YOU GOT THIS ONE CORRECT. WELL DONE !");
-                } else {
-                    //work out which choice the user made using the percentage behind
-                    reviewText.setText("YOU DID NOT GET THIS ONE RIGHT. YOU WERE " + ((currentChoice.getPercentageBehind() * 100) - 100) + " PERCENT BEHIND. IT TOOK YOU " + currentChoice.getTimeTaken() + " MILLISECONDS TO CHOOSE!");
+                if (currentChoice.getTimeTaken() > 0) {
+                    if (currentChoice.isCorrectChoice()) {
+                        reviewText.setText("YOU GOT THIS ONE CORRECT. WELL DONE ! IT TOOK YOU " + currentChoice.getTimeTaken() + " MILLISECONDS TO CHOOSE !");
+                    } else {
+                        //work out which choice the user made using the percentage behind
+                        reviewText.setText("YOU DID NOT GET THIS ONE RIGHT. YOU WERE " + ((currentChoice.getPercentageBehind() * 100) - 100) + " PERCENT BEHIND. IT TOOK YOU " + currentChoice.getTimeTaken() + " MILLISECONDS TO CHOOSE!");
+                    }
+                }else
+                {
+                    if (currentChoice.isCorrectChoice()) {
+                        reviewText.setText("YOU GOT THIS ONE CORRECT. WELL DONE ! IT TOOK YOU " + currentChoice.getNumGlances() + " GLANCES TO CHOOSE !");
+                    } else {
+                        //work out which choice the user made using the percentage behind
+                        reviewText.setText("YOU DID NOT GET THIS ONE RIGHT. YOU WERE " + ((currentChoice.getPercentageBehind() * 100) - 100) + " PERCENT BEHIND. IT TOOK YOU " + currentChoice.getNumGlances() + " GLANCES TO CHOOSE!");
+                    }
                 }
             }
+
         } else {
             System.out.println("RAN OUT OF CHOICES");
             backBtn();

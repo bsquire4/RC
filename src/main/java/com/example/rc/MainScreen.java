@@ -89,6 +89,10 @@ public class MainScreen {
     private void saveChoice(float temp) {
         Choices tempchoice;
         if (Objects.equals(HelloApplication.gameModeSettings.getGameMode(), "GlanceViewMode")) {
+            if(glanceCounter == 0)
+            {
+                glanceCounter = timeline.getCycleCount();
+            }
             tempchoice = new Choices(Map.id, temp, glanceCounter);
             glanceCounter = 0;
         } else {

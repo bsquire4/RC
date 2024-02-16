@@ -2,6 +2,8 @@
 .root {
     -fx-background-color: #303030;
     -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
+    -fx-transition-duration: 0.3s;
+
 }
 
 /* Label styling */
@@ -35,7 +37,6 @@
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-font-family: "Franklin Gothic Heavy", sans-serif; /* Cool font suggestion */
-    -fx-transition-duration: 0.3s;
     -fx-cursor: pointer;
 }
 
