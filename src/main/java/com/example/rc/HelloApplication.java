@@ -62,6 +62,7 @@ public class HelloApplication extends Application {
                 temp_id = Integer.parseInt(scanner.next());
                 System.out.println(temp_id);
                 temp_Blanklocation = scanner.next();
+
                 System.out.println(temp_Blanklocation);
                 temp_Routelocation = scanner.next();
                 temp_Distancelocation= scanner.next();
